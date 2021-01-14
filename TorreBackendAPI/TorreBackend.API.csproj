@@ -4,5 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TorreBackend.Business\TorreBackend.Business.csproj" />
+    <ProjectReference Include="..\TorreBackend.Entities\TorreBackend.Entities.csproj" />
+  </ItemGroup>
+
 
 </Project>

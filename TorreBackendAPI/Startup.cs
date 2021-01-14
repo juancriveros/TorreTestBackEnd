@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TorreBackend.API.Models;
+using TorreBackend.Business;
+using TorreBackend.Entities;
 
 namespace TorreBackendAPI
 {
@@ -25,6 +29,17 @@ namespace TorreBackendAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddAutoMapper(configuration =>
+            {
+
+                configuration.CreateMap<AgregatorValue, AggregatorSummaryModel>();
+
+            }, typeof(Startup));
+
+
+            services.AddSingleton<OpportunityBusiness>(new OpportunityBusiness(new ApiClient(new Uri("https://search.torre.co/"))));
+            services.AddSingleton<UsersBusiness>(new UsersBusiness(new ApiClient(new Uri("https://search.torre.co/"))));
             services.AddControllers();
         }
 
