@@ -26,7 +26,7 @@ namespace TorreBackend.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetSummary")]
+        [Route("Summary")]
         public async Task<ActionResult<IEnumerable<AggregatorSummaryModel>>> Get()
         {
             var topSkills = await usersBusiness.GetTopThreeUsersSkills();
