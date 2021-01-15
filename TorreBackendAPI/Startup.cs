@@ -34,12 +34,17 @@ namespace TorreBackendAPI
             {
 
                 configuration.CreateMap<AgregatorValue, AggregatorSummaryModel>();
+                configuration.CreateMap<OpportunityResult, SearchOpportunityResultModel>();
+                configuration.CreateMap<Organization, OrganizationModel>();     
+                configuration.CreateMap<Compensation, CompensationModel>();
+                configuration.CreateMap<CompensationData, CompensationDataModel>();
+                configuration.CreateMap<Skill, SkillModel>();
 
             }, typeof(Startup));
 
 
-            services.AddSingleton<OpportunityBusiness>(new OpportunityBusiness(new ApiClient(new Uri("https://search.torre.co/"))));
-            services.AddSingleton<UsersBusiness>(new UsersBusiness(new ApiClient(new Uri("https://search.torre.co/"))));
+            services.AddSingleton<OpportunityBusiness>(new OpportunityBusiness(new ApiClient(new Uri("https://search.torre.co/opportunities/_search/"))));
+            services.AddSingleton<UsersBusiness>(new UsersBusiness(new ApiClient(new Uri("https://search.torre.co/people/_search/"))));
             services.AddControllers();
         }
 

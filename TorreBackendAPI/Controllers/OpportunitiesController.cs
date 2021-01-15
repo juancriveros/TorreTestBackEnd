@@ -35,5 +35,19 @@ namespace TorreBackend.API.Controllers
             return topOpportunitiesModel;
         }
 
+        [HttpGet]
+        [Route("Search")]
+        public async Task<ActionResult<IEnumerable<SearchOpportunityResultModel>>> Search(int pageNumber, int offset, int size = 15, string name = "", bool? placeBased = null, string status = "", string type = "", string currency = "", string periodicity = "", double? amount = null, string  skill = "")
+        {
+
+            var opportunities = await opportunityBusiness.SearchOpportunities(pageNumber, size, offset, name, placeBased, status, type, currency, periodicity, amount, skill);
+
+            Response.Headers["X-Offset"] = opportunityBusiness._offset.ToString();
+
+            var opportunitiesModel = mapper.Map<List<SearchOpportunityResultModel>>(opportunities);
+
+            return opportunitiesModel;
+        }
+
     }
 }

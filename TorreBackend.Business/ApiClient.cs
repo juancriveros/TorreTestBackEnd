@@ -43,9 +43,9 @@ namespace TorreBackend.Business
             return JsonConvert.DeserializeObject<T>(data);
         }
 
-        public Uri CreateRequestUri(string relativePath, string queryString = "")
+        public Uri CreateRequestUri(string queryString = "")
         {
-            var endpoint = new Uri(BaseEndpoint, relativePath);
+            var endpoint = new Uri(BaseEndpoint.ToString());
             var uriBuilder = new UriBuilder(endpoint);
             uriBuilder.Query = queryString;
             return uriBuilder.Uri;

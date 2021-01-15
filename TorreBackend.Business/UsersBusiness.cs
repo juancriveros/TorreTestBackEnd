@@ -18,8 +18,14 @@ namespace TorreBackend.Business
 
         private async Task<PersonSearch> GetUsers(int size, bool aggregator, int offset)
         {
-            var requestUrl = _apiClient.CreateRequestUri(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                "people/_search/"), "?aggregate=" + aggregator.ToString().ToLower() + "&offset=" + offset.ToString() + "&size=" + size.ToString());
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("?size=");
+            stringBuilder.Append(size.ToString());
+            stringBuilder.Append("&aggregate=");
+            stringBuilder.Append(aggregator.ToString().ToLower());
+            stringBuilder.Append("&offset=");
+            stringBuilder.Append(offset.ToString());
+            var requestUrl = _apiClient.CreateRequestUri(stringBuilder.ToString());
             PersonSearch result = new PersonSearch();
             result = await _apiClient.PostAsync<PersonSearch>(requestUrl, result);
             return result;
